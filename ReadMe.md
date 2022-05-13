@@ -8,7 +8,7 @@
 RelationNet is a web tool focusing on drawing and generating relationship networks.
 It aims to make creators more concentrating on relationship, rather than wasting energy on drawing or modifying  images.
 
-![](img\dsn20220512-系网logo.png)
+![系网logo](img\dsn20220512-系网logo.png)
 
 ---
 
@@ -39,9 +39,9 @@ It aims to make creators more concentrating on relationship, rather th
 ### 排列
 - 最大中心排列：选择“排列”→“最大中心排列”，将以连线最多的节点为中心向外扩散，重新排列整个绘图。
     排列前：
-    ![](img\snp2022051301-最大中心排列前.png)
+    ![最大中心排列前](img\snp2022051301-最大中心排列前.png)
     排列后：
-    ![](img\snp2022051302-最大中心排列后.png)
+    ![最大中心排列后](img\snp2022051302-最大中心排列后.png)
 
 ---
 
