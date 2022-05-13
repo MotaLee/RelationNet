@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <title>系网 - RelationNet</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="content-type" content="text/html" charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="CSS/base.css">
+        <link rel="shortcut icon" href="img/favicon.ico" >
+        <script src="script/p5.js"></script>
+        <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    </head>
+    <body>
+        <!-- <template id="tpl_node">
+            <div v-bind:id="{{'div_node_'+nid}}"
+                class="DivNode" v-bind:style="net.node_stl[nid]"
+                v-on:dblclick="onDClickNode" >
+                <div>{{node_name}}</div>
+            </div>
+        </template> -->
+        <div id="div_page"></div>
+        <div id="div_side">
+            <div id="div_netname">{{netname}}</div>
+            <!-- <div id="div_tree">tree</div> -->
+            <div id="div_title">系网 - RelationNet</div>
+        </div>
+        <div id="div_tool">
+            <div id="btn_file" class="Btn">
+                文件
+                <div id="div_file_drop" class="DivDrop">
+                    <div id="btn_new" class="Btn Option" @click="newNet">新建</div>
+                    <div id="btn_open" class="Btn Option" @click="onClickOpen">
+                        打开..
+                        <input id="ipt_open" type="file"
+                            ref="ipt_open" @change="onOpenChange"></input>
+                    </div>
+
+                    <div id="btn_save" class="Btn Option" @click="onClick">保存{{text}}</div>
+                    <div id="btn_export" class="Btn Option" @click="onClick">导出..</div>
+                    <div id="btn_about" class="Btn Option">关于..</div>
+
+                </div>
+            </div>
+            <div id="btn_edit" class="Btn">
+                编辑
+                <div id="div_edit_drop" class="DivDrop">
+                    <div id="btn_cut" class="Btn Option" @click="onClick">剪切 Ctrl+X</div>
+                    <div id="btn_cpy" class="Btn Option" @click="onClickOpen">复制 Ctrl+C</div>
+                    <div id="btn_pst" class="Btn Option" @click="onClick">粘贴  Ctrl+V</div>
+                    <div id="btn_undo" class="Btn Option" @click="onClick">撤销 Ctrl+Z</div>
+                    <div id="btn_redo" class="Btn Option" @click="onClick">重做 Ctrl+Y</div>
+                    <div id="btn_hide" class="Btn Option">隐藏 Ctrl+H</div>
+                    <div id="btn_lone" class="Btn Option">孤立 Ctrl+G</div>
+                </div>
+            </div>
+            <div id="btn_arr" class="Btn">
+                排列
+                <div id="div_arr_drop" class="DivDrop">
+                    <div id="btn_ctr" class="Btn Option" @click="onClick">最大中心排列</div>
+                    <div id="btn_min" class="Btn Option" @click="onClickOpen">最小交叉排列</div>
+                    <div id="btn_sctr" class="Btn Option" @click="onClick">指定中心排列</div>
+                    <div id="btn_line" class="Btn Option" @click="onClick">直线排列</div>
+                    <div id="btn_loop" class="Btn Option">环形排列</div>
+                </div>
+            </div>
+            <div id="btn_style" class="Btn">样式</div>
+            <div id="btn_switch" class="Btn" @mouseover="onOver">
+                开关
+                <div id="div_switch_free" class="DivDrop">
+                    <div id="div_free" class="DivSwitch" @click="newNet">
+                        <div style="float: left;">自由模式</div>
+                        <input id='ipt_free' type="checkbox" name="ipt_free" class="Switch"
+                            v-model='ena_free'/>
+
+                    </div>
+                    <div id="div_align" class="DivSwitch" @click="newNet">
+                        <div style="float: left;">对齐模式</div>
+                        <input id='ipt_align' type="checkbox" class="Switch"
+                            v-model='ena_align' />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="div_main">
+            <div id="div_splash" v-show="visible">
+                <div class="DivTip">
+                    <br><br><br>
+                    选择：<div class="DivTipText">LMB</div>
+                    <br><br><br>
+                    编辑：双击 <div class="DivTipText">LMB</div>
+                    <br><br><br>
+                    删除：<div class="DivTipText">Ctrl</div>+<div class="DivTipText">X</div>
+                </div>
+                <div id="div_bg"></div>
+                <div class="DivTip">
+                    <br><br><br>
+                    创建&连接：拖动<div class="DivTipText">RMB</div>
+                    <br><br><br>
+                    确认：<div class="DivTipText">Enter</div>
+                    <br><br><br>
+                    取消&退出：<div class="DivTipText">ESC</div>
+                </div>
+            </div>
+            <div id="div_cvs" v-bind:style="CvsStl" ref="div_cvs"
+                @wheel="onWheel"
+                @mousemove="onMove"
+                @mousedown="onMouseDown"
+                @mouseup="onMouseUp">
+                <div id="div_ctn" ref="div_ctn" v-if="visible">
+                    <div class="DivPoint"
+                        v-bind:id="'div_point_'+pid"
+                        v-bind:style="point"
+                        v-on:mousedown.stop="onDownPoint(pid)"
+                        v-on:mouseup.stop="onUpPoint(pid)"
+                        v-on:mousemove.stop="onMovePoint(pid)"
+                        v-on:dblclick="onDClickPoint(pid)"
+                        v-for="(point,pid) in points">
+                        <input type="text" class="IptNode"
+                            v-bind:value="net.points[pid].name"
+                            v-bind:id="'ipt_point_'+pid"
+                            v-show="point.stg_edit"
+                            v-on:keyup.enter.stop="onEnterPoint(pid)"
+                            v-on:keyup.esc.stop="onEscPoint(pid)" />
+                    </div>
+                    <div class="DivLink"
+                        v-bind:id="'div_link_'+lid"
+                        v-bind:style="link"
+                        v-on:mouseup.stop="onUpLink(lid)"
+                        v-on:mousedown.stop="onDownLink(lid)"
+                        v-on:mousemove.stop="onMoveLink(lid)"
+                        v-on:dblclick="onDClickLink(lid)"
+                        v-for="(link,lid) in links">
+                        <input type="text" class="IptNode"
+                            v-bind:value="net.links[lid].desc"
+                            v-bind:id="'ipt_link_'+lid"
+                            v-show="link.stg_edit"
+                            v-on:keyup.enter.stop="onEnterLink(lid)"
+                            v-on:keyup.esc.stop="onEscLink(lid)" />
+                    </div>
+                </div>
+                <main id="p5_cvs"></main>
+            </div>
+        </div>
+        <script src="script/vue.js"></script>
+        <script src="script/rn.js"></script>
+    </body>
+</html>

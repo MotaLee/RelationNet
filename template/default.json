@@ -1,0 +1,85 @@
+{
+"name":"关系网一",
+"ver":"无空一",
+"midx":6,
+"styles":{
+    "0":{
+        "sid":0,
+        "name":"默认款式",
+        "font":"思源黑体",
+        "font_size":15,
+        "font_color":"#ffffff",
+        "node_shape":"自由圆",
+        "back_color":"#000000",
+        "tmn_size":10,
+        "tmn_shape":["无","箭头"],
+        "line_type":10,
+        "line_wgt":2
+    },
+    "6":{
+        "sid":6,
+        "name":"默认款式",
+        "font":"思源黑体",
+        "font_size":15,
+        "font_color":"#ffffff",
+        "node_shape":"自由圆",
+        "back_color":"#555555",
+        "tmn_size":10,
+        "tmn_shape":["无","箭头"],
+        "line_type":10,
+        "line_wgt":2
+    }
+},
+"points":{
+    "1":{
+        "nid":1,
+        "name":"一",
+        "type":"point",
+        "desc":"",
+        "style":0,
+        "shape":"自由圆",
+        "ports":{},
+        "image":"",
+        "geo":[0.0,100,100,50,50]
+    },
+    "2":{
+        "nid":2,
+        "name":"二",
+        "type":"point",
+        "desc":"",
+        "style":0,
+        "shape":"自由圆",
+        "ports":{},
+        "image":"",
+        "geo":[0.0,100,100,50,50]
+    }
+},
+"links":{
+    "3":{
+        "lid":3,
+        "desc":"1",
+        "style":0,
+        "start":[[1,-1]],
+        "end":[[2,-1]],
+        "step":[],
+        "geo":[0.0,0,0]
+    }
+},
+"graphs":{
+    "5":{
+        "nid":5,
+        "name":"G1",
+        "type":"graph",
+        "desc":"",
+        "style":6,
+        "shape":"自由圆",
+        "ports":{},
+        "geo":[0.0,0,0,1000,1000],
+        "overlay":{
+            "1":{"geo":[0.0,100,100,50,50]},
+            "2":{"geo":[0.0,200,200,50,50]},
+            "3":{"geo":[0.0,0,0]}
+        }
+    }
+}
+}

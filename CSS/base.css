@@ -1,0 +1,231 @@
+@charset "utf-8";
+body{
+    margin: 0px;
+    text-align: center;
+    font-family: "思源黑体","微软雅黑";
+    background-color: #545;
+    color: #888;
+}
+
+#div_page{
+    overflow: hidden;
+    z-index: 1;
+    margin: auto;
+    /* background-image: url(../img/BG1.jpg); */
+    /* background-repeat: no-repeat; */
+	/* background-size: 200px 200px; */
+}
+#div_side{
+    position: fixed;
+    width: calc(25vw - 1vh);
+    height: 96vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-right: 1vh;
+    border-top-right-radius: 20px 20px;
+    border-bottom-right-radius: 20px 20px;
+    border: #fc9 2px solid;
+    border-left: none;
+    background-color: rgb(93, 67, 115);
+
+}
+#div_netname{
+    color:#fff;
+}
+#div_tree{
+    position: fixed;
+    width: 30%;
+    /* border-top: #ff6600 1px solid; */
+
+}
+#div_title{
+    position: absolute;
+    bottom: 1%;
+    width: 100%;
+    color: #888;
+    /* border-top: #ff6600 1px solid; */
+}
+#div_tool{
+    position: fixed;
+    width: calc(75vw - 4vh);
+    height: 5vh;
+    margin: 2vh;
+    right: 0vh;
+    border-radius: 1vh 1vh;
+    border: #fc9 2px solid;
+    /* background-image: linear-gradient(to bottom,#fff,#ccc); */
+    background-color: rgb(93, 67, 115);
+    /* box-shadow: 0vh -0.5vh 0px 0px rgb(174, 126, 94) inset; */
+    z-index: 2;
+}
+#div_main{
+    position: fixed;
+    width: calc(75vw - 4vh);
+    height: 89vh;
+    right: 2vh;
+    bottom: 1vh;
+    border-radius: 1vh 1vh;
+    border: #fc9 2px solid;
+    z-index: 1;
+    overflow: hidden;
+
+}
+#div_splash{
+    width: inherit;
+    height: inherit;
+    opacity: 0.5;
+
+}
+
+#div_cvs{
+    overflow: hidden;
+    position: relative;
+    border: #333 1px solid;
+    border-radius: 2vh;
+}
+.Btn{
+    cursor: pointer;
+    box-sizing: border-box;
+    line-height: 5vh;
+    height: 5vh;
+    float: left;
+    color: #fc9;
+    width: fit-content;
+    margin-left: 1vh;
+    margin-right: 1vh;
+}
+#ipt_open{
+    width: 50px;
+    height: 24px;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* cursor: pointer; */
+}
+.Btn:hover{
+    border-bottom: #fc9 3px solid;
+}
+.Btn:hover .DivDrop{
+    display: block;
+}
+.DivDrop{
+    display: none;
+    position: absolute;
+    background-color: rgb(59, 43, 74);
+    border-radius: 1vh 1vh;
+    /* border: #fc9 2px solid; */
+    top:5vh;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 1vh 1ch;
+}
+
+.Option{
+    float: none;
+    height: 8vh;
+    line-height: 8vh;
+}
+
+.DivPoint{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px var(--node_glow_size) 0px var(--node_glow_color);
+    position: absolute;
+}
+.DivLink{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    min-width: 4vh;
+    min-height: 4vh;
+    /* border: #333 1px solid; */
+}
+
+.DivSwitch{
+    box-sizing: border-box;
+    line-height: 6vh;
+    height: 6vh;
+    color: #fc9;
+    width: fit-content;
+    margin-left: 1vh;
+    margin-right: 1vh;
+}
+.Switch{
+    float: left;
+    position: absolute;
+    appearance: none;
+    cursor:pointer;
+    margin-left: 1vh;
+    margin-right: 1vh;
+    width: 8vh;
+    height: 4vh;
+    border:solid 1px #fc9;
+    border-radius: 2vh;
+    transform: translate(0,0.5vh);
+}
+.Switch:hover{
+    background-color: #545;
+}
+.Switch::before{
+    display: block;
+    content: '';
+    width: 2vh;
+    height:2vh;
+    border:solid 1px #fc9;
+    border-radius: 1vh;
+    transform: translate(1vh,30%);
+    transition: all 0.3s;
+}
+.Switch:checked{
+    background-color: #fc9;
+}
+.Switch:checked::before{
+    border-color: #333333;
+    background-color: #333333;
+    transform: translate(5vh,30%);
+    transition: all 0.3s;
+}
+
+.IptNode{
+    display: flex;
+    width: 15vh;
+    height: 5vh;
+    color: #333;
+    background-color: #fff;
+    text-align: center;
+    font-size: 3vh;
+    border-radius: 1vh;
+    border: #fc9 1px solid;
+}
+
+#div_bg{
+    width: calc(37.5vw - 6vh);
+    height: inherit;
+    background-image: url("../img/dsn20220512-系网logo.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    float: left;
+}
+.DivTip{
+    float: left;
+    width: calc(18.75vw - 3vh);
+    height: inherit;
+    font-size: 3vh;
+    color:rgb(23, 0, 23);
+    cursor:pointer;
+    text-align: center;
+    padding: 2vh;
+}
+.DivTipText{
+    color: rgb(255, 179, 98);
+    border: #111 1px solid;
+    border-radius: 5px;
+    display: inline;
+    width: min-content;
+    padding-left: 5px;
+    padding-right: 5px;
+}
